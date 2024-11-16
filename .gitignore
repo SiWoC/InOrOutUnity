@@ -72,5 +72,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /Assets/Resources/playerprefs.json
-AndroidBuilds
 /Assets/Resources/playerprefs.json.meta
+AndroidBuilds
+/.utmp
