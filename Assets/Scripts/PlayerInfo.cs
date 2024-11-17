@@ -23,42 +23,53 @@ public class PlayerInfo : MonoBehaviour
     public TMP_InputField outsiderInputField;
 
     public int index;
-    private Role role;
 
-    public Role GetRole()
-    {
-        return role;
-    }
-
-    public void SetRole(Role newRole)
-    {
-        role = newRole;
-    }
+    private float singleFieldHeigth = 100f;
 
     public void Resize()
     {
-        RectTransform rectTransform = GetComponent<RectTransform>();
+        int numFields = 1;
         switch (GameManager.GetState())
         {
             case State.EnteringPlayers:
-                rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 100);
+                numFields = 1;
                 break;
             case State.ShowChosenWord:
-                rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 200);
+            case State.EnteringFirstWord:
+            case State.ShowingFirstWords:
+                numFields = 2;
+                break;
+            case State.EnteringSecondWord:
+            case State.ShowingSecondWords:
+                numFields = 3;
+                break;
+            case State.EnteringOutsider:
+            case State.ShowingOutsider:
+                numFields = 4;
                 break;
         }
-        ActivatePanels();
-    }
 
-    private void ActivatePanels()
-    {
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, singleFieldHeigth * numFields);
+
+        nameInputField.interactable = (GameManager.GetState() == State.EnteringPlayers);
         buzzWordPanel.SetActive(GameManager.GetState() == State.ShowChosenWord);
         firstWordPanel.SetActive(GameManager.GetState() == State.EnteringFirstWord
-                                || GameManager.GetState() == State.ShowingFirstWords);
+                                || GameManager.GetState() == State.ShowingFirstWords
+                                || GameManager.GetState() == State.EnteringSecondWord
+                                || GameManager.GetState() == State.ShowingSecondWords
+                                || GameManager.GetState() == State.EnteringOutsider
+                                || GameManager.GetState() == State.ShowingOutsider);
+        firstWordInputField.interactable = (GameManager.GetState() == State.EnteringFirstWord);
         secondWordPanel.SetActive(GameManager.GetState() == State.EnteringSecondWord
-                                || GameManager.GetState() == State.ShowingSecondWords);
+                                || GameManager.GetState() == State.ShowingSecondWords
+                                || GameManager.GetState() == State.EnteringOutsider
+                                || GameManager.GetState() == State.ShowingOutsider);
+        secondWordInputField.interactable = (GameManager.GetState() == State.EnteringSecondWord);
         outsiderPanel.SetActive(GameManager.GetState() == State.EnteringOutsider
                                 || GameManager.GetState() == State.ShowingOutsider);
+        outsiderInputField.interactable = (GameManager.GetState() == State.EnteringOutsider);
+
     }
 
     internal void SetIndexAndNameLabel(int i)
@@ -71,9 +82,34 @@ public class PlayerInfo : MonoBehaviour
     {
         return nameInputField.text;
     }
+
+    public void SetName(string nameIn)
+    {
+        nameInputField.text = nameIn;
+    }
+
     internal bool HasName()
     {
+        nameInputField.text = nameInputField.text.Trim();
         return !string.IsNullOrWhiteSpace(nameInputField.text);
+    }
+
+    internal bool HasFirstWord()
+    {
+        firstWordInputField.text = firstWordInputField.text.Trim();
+        return !string.IsNullOrWhiteSpace(firstWordInputField.text);
+    }
+
+    internal bool HasSecondWord()
+    {
+        secondWordInputField.text = secondWordInputField.text.Trim();
+        return !string.IsNullOrWhiteSpace(secondWordInputField.text);
+    }
+
+    internal bool HasOutsider()
+    {
+        outsiderInputField.text = outsiderInputField.text.Trim();
+        return !string.IsNullOrWhiteSpace(outsiderInputField.text);
     }
 
     internal void SetBuzzWord(string buzzWord)

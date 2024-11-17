@@ -1,7 +1,8 @@
+using Globals;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AllPlayersPanelController : MonoBehaviour
 {
@@ -9,68 +10,142 @@ public class AllPlayersPanelController : MonoBehaviour
     public GameObject contentPanel;
     public GameObject playerInfoPrefab;
     public GameObject readyButton;
+    public GameObject errorMessage;
 
-    private float contentPanelHeigth = 0;
-    private float singleFieldHeigth = 100;
+    private float contentPanelHeigth = 0f;
+    private float singleFieldHeigth = 100f;
+    private float spacing = 15f;
     private List<GameObject> playerInfoObjects = new List<GameObject>();
-    private Button button;
+    private int maxPlayers = 10;
+    List<string> playerNames = new List<string>();
+
+    void Awake()
+    {
+        GameManager.NextStateEvent += GameManager_NextStateEvent;
+    }
 
     void Start()
     {
-        // phRectTransform = contentPanel.GetComponent<RectTransform>();
-        for (int i = 1; i <= 10; i++)
-        {
-            AddPlayerInfo(i);
-        }
-        button = readyButton.GetComponent<Button>();
-        button.interactable = true;
+        SetEnteringPlayers();
     }
 
-    private void AddPlayerInfo(int i)
+    private void GameManager_NextStateEvent()
+    {
+        switch (GameManager.GetState())
+        {
+            case State.ShowingFirstWords:
+                AddShowingPlayers(2);
+                break;
+            case State.ShowingSecondWords:
+                AddShowingPlayers(3);
+                break;
+            case State.ShowingOutsider:
+                AddShowingPlayers(4);
+                break;
+        }
+    }
+
+    private void AddShowingPlayers(int numFields)
+    {
+        contentPanelHeigth = 0;
+        foreach (GameObject playerInfoObject in playerInfoObjects)
+        {
+            PlayerInfo playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
+            PlayerInfoResizeAndSetParent(numFields, playerInfoObject, playerInfo);
+            playerInfoObject.SetActive(true);
+        }
+    }
+
+    public void SetEnteringPlayers()
+    {
+        // when we are restarting destroy old playerObjects (easier than cleaning)
+        if (playerNames != null && playerNames.Count > 0)
+        {
+            Debug.Log("playernames " + playerNames.Count + " " + playerNames[0]);
+            foreach (GameObject playerInfoObject in playerInfoObjects)
+            {
+                DestroyImmediate(playerInfoObject);
+            }
+            playerInfoObjects.Clear();
+        }
+        Debug.Log("objects left " + playerInfoObjects.Count);
+        // and create new ones with prefilled names if we have any
+        for (int i = 1; i <= maxPlayers; i++)
+        {
+            if (playerNames != null && playerNames.Count > 0 && i <= playerNames.Count)
+            {
+                AddEnteringPlayer(i, 1, playerNames[i - 1]);
+            }
+            else
+            {
+                AddEnteringPlayer(i, 1, "");
+            }
+        }
+    }
+
+    private void AddEnteringPlayer(int index, int numFields, string playerName)
     {
         GameObject playerInfoObject = GameObject.Instantiate(playerInfoPrefab);
         playerInfoObjects.Add(playerInfoObject);
         PlayerInfo playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
-        playerInfo.SetIndexAndNameLabel(i);
+        playerInfo.SetIndexAndNameLabel(index);
+        playerInfo.SetName(playerName);
+        PlayerInfoResizeAndSetParent(numFields, playerInfoObject, playerInfo);
+    }
+
+    private void PlayerInfoResizeAndSetParent(int numFields, GameObject playerInfoObject, PlayerInfo playerInfo)
+    {
         playerInfo.Resize();
         playerInfoObject.transform.SetParent(contentPanel.transform);
         playerInfoObject.transform.localScale = new Vector3(1f, 1f, 1f);
         RectTransform phRectTransform = contentPanel.GetComponent<RectTransform>();
-        contentPanelHeigth += singleFieldHeigth;
+        contentPanelHeigth += singleFieldHeigth * numFields;
+        contentPanelHeigth += spacing;
         phRectTransform.sizeDelta = new Vector2(phRectTransform.sizeDelta.x, contentPanelHeigth);
-        /*
-        statisticsGroupObject.transform.SetParent(contentPanel.transform);
-        statisticsGroupObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        RectTransform phRectTransform = contentPanel.GetComponent<RectTransform>();
-        contentPanelHeigth += statisticsGroupHeight;
-        phRectTransform.sizeDelta = new Vector2(phRectTransform.sizeDelta.x, contentPanelHeigth);
-
-         
-        RectTransform playerInfoPanelRT = playerInfoPanel.GetComponent<RectTransform>();
-        playerInfoPanelRT.anchoredPosition = new Vector3(0f, -1f * ycoord, 0f);
-         */
+        /* position is solved by a Vertical Layout Group */
     }
 
-    public void CheckNumberOfPlayers()
+    public bool ValidateInput()
     {
-        int i = 1;
+        int numberOfPlayers = 0;
+        playerNames.Clear();
+        List<string> nonUnique = new List<string>();
         foreach (GameObject playerInfoObject in playerInfoObjects)
         {
             PlayerInfo playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
             if (playerInfo.HasName())
             {
-                i++;
+                numberOfPlayers++;
+                if (playerNames.Contains(playerInfo.GetName()))
+                {
+                    nonUnique.Add(playerInfo.GetName());
+                }
+                else
+                {
+                    playerNames.Add(playerInfo.GetName());
+                }
+
             }
         }
-        Debug.Log("NumberOfPlayers " + i);
-        if (i > 2)
+        if (nonUnique.Count > 0)
         {
-            button.interactable = true;
+            StartCoroutine(ShowErrorMessage("De spelernamen moeten\n uniek zijn.\n" + nonUnique[0]));
+            return false;
         }
-        else
+        if (numberOfPlayers < 3)
         {
-            button.interactable = false;
+            StartCoroutine(ShowErrorMessage("Er moeten minstens\n3 spelers zijn"));
+            return false;
         }
+        return true;
+    }
+
+    IEnumerator ShowErrorMessage(string message)
+    {
+        errorMessage.GetComponent<TMP_Text>().text = message;
+        errorMessage.SetActive(true);
+        yield return new WaitForSeconds(4);
+        errorMessage.SetActive(false);
     }
 
     public List<GameObject> GetPlayers()
@@ -83,12 +158,12 @@ public class AllPlayersPanelController : MonoBehaviour
             if (playerInfo.HasName())
             {
                 playerInfo.SetIndexAndNameLabel(i++);
-                Debug.Log("Adding [" + playerInfo.nameInputField.text + "]");
                 enteredPlayers.Add(playerInfoObject);
             } else {
                 Destroy(playerInfoObject);
             }
         }
+        playerInfoObjects = enteredPlayers;
         return enteredPlayers;
     }
 

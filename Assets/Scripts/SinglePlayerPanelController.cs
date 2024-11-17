@@ -1,4 +1,5 @@
 using Globals;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,11 +19,29 @@ public class SinglePlayerPanelController : MonoBehaviour
     private GameObject playerInfoObject;
     private PlayerInfo playerInfo;
 
+    void Awake()
+    {
+        GameManager.NextStateEvent += GameManager_NextStateEvent;
+    }
+
     void Start()
     {
         nameButton = nameButtonObject.GetComponent<Button>();
         oopsButton = oopsButtonObject.GetComponent<Button>();
         readyButton = readyButtonObject.GetComponent<Button>();
+    }
+
+    private void GameManager_NextStateEvent()
+    {
+        switch (GameManager.GetState())
+        {
+            case State.ShowChosenWord:
+            case State.EnteringFirstWord:
+            case State.EnteringSecondWord:
+            case State.EnteringOutsider:
+                NextPlayer();
+                break;
+        }
     }
 
     public void NextPlayer()
@@ -32,7 +51,6 @@ public class SinglePlayerPanelController : MonoBehaviour
         {
             playerInfoObject.SetActive(false);
             playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
-            Debug.Log("Got player " +  playerInfo.index);
             playerInfo.Resize();
             playerInfoObject.transform.SetParent(contentPanel.transform);
             playerInfoObject.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -66,7 +84,23 @@ public class SinglePlayerPanelController : MonoBehaviour
 
     public void OnPlayerReady()
     {
-        playerInfoObject.SetActive(false);
-        NextPlayer();
+        bool filled = true;
+        switch (GameManager.GetState())
+        {
+            case State.EnteringFirstWord:
+                filled = playerInfo.HasFirstWord();
+                break;
+            case State.EnteringSecondWord:
+                filled = playerInfo.HasSecondWord();
+                break;
+            case State.EnteringOutsider:
+                filled = playerInfo.HasOutsider();
+                break;
+        }
+        if (filled)
+        {
+            playerInfoObject.SetActive(false);
+            NextPlayer();
+        }
     }
 }

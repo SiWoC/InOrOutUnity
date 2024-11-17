@@ -14,6 +14,13 @@ public class MainSceneController : MonoBehaviour
     public GameObject panelAllPlayers;
     public GameObject panelSinglePlayer;
     public GameObject panelPauze;
+    public GameObject panelToEnteringFirstWord;
+    public GameObject panelToShowingFirstWords;
+    public GameObject panelToEnteringSecondWord;
+    public GameObject panelToShowingSecondWords;
+    public GameObject panelToEnteringOutsider;
+    public GameObject panelToShowingOutsider;
+    public GameObject panelEndOverviewRestart;
 
     private AllPlayersPanelController apc;
     private SinglePlayerPanelController spc;
@@ -51,14 +58,15 @@ public class MainSceneController : MonoBehaviour
     private void OnBuzzWordsGenerated()
     {
         GameManager.NextState();
-        spc.NextPlayer();
     }
 
     private void OnDestroy()
     {
         WordSetGenerator.BuzzWordsGenerated -= OnBuzzWordsGenerated;
     }
-    public void OnRulesOK()
+
+    // called by buttons, don't refactor away
+    public void NextState()
     {
         GameManager.NextState();
     }
@@ -67,24 +75,32 @@ public class MainSceneController : MonoBehaviour
     {
         if (GameManager.GetState() == State.EnteringPlayers)
         {
-            GameManager.SetPlayers(apc.GetPlayers());
-            GameManager.NextState();
-            switch (GameManager.generatorType)
+            if (apc.ValidateInput())
             {
-                case GeneratorType.OpenAI:
-                    WordSetGenerator.GenerateBuzzWordsAsync();
-                    break;
-                default:
-                    WordSetGenerator.GenerateBuzWordsSync();
-                    break;
+
+                GameManager.SetPlayers(apc.GetPlayers());
+                GameManager.NextState();
+                switch (GameManager.GetGeneratorType())
+                {
+                    case GeneratorType.OpenAI:
+                        WordSetGenerator.GenerateBuzzWordsAsync();
+                        break;
+                    default:
+                        WordSetGenerator.GenerateBuzWordsSync();
+                        break;
+                }
             }
+        }
+        else
+        {
+            NextState();
         }
     }
 
     private void ActivatePanels()
     {
         panelRules.SetActive(GameManager.GetState() == State.Rules);
-        panelPauze.SetActive(GameManager.GetState() == State.Pauze);
+        panelPauze.SetActive(GameManager.GetState() == State.GeneratingWords);
         panelAllPlayers.SetActive(GameManager.GetState() == State.EnteringPlayers
                                 || GameManager.GetState() == State.ShowingFirstWords
                                 || GameManager.GetState() == State.ShowingSecondWords
@@ -93,6 +109,19 @@ public class MainSceneController : MonoBehaviour
                                 || GameManager.GetState() == State.EnteringFirstWord
                                 || GameManager.GetState() == State.EnteringSecondWord
                                 || GameManager.GetState() == State.EnteringOutsider);
+        panelToEnteringFirstWord.SetActive(GameManager.GetState() == State.ToEnteringFirstWord);
+        panelToShowingFirstWords.SetActive(GameManager.GetState() == State.ToShowingFirstWords);
+        panelToEnteringSecondWord.SetActive(GameManager.GetState() == State.ToEnteringSecondWord);
+        panelToShowingSecondWords.SetActive(GameManager.GetState() == State.ToShowingSecondWords);
+        panelToEnteringOutsider.SetActive(GameManager.GetState() == State.ToEnteringOutsider);
+        panelToShowingOutsider.SetActive(GameManager.GetState() == State.ToShowingOutsider);
+        panelEndOverviewRestart.SetActive(GameManager.GetState() == State.EndOverviewRestart);
+    }
+
+    public void Again()
+    {
+        GameManager.SetState(State.EnteringPlayers);
+        apc.SetEnteringPlayers();
     }
 
     public void OnLayout()

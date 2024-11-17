@@ -9,14 +9,21 @@ namespace Globals
     {
         Rules,
         EnteringPlayers,
-        Pauze,
+        GeneratingWords,
         ShowChosenWord,
+        ToEnteringFirstWord,
         EnteringFirstWord,
+        ToShowingFirstWords,
         ShowingFirstWords,
+        ToEnteringSecondWord,
         EnteringSecondWord,
+        ToShowingSecondWords,
         ShowingSecondWords,
+        ToEnteringOutsider,
         EnteringOutsider,
-        ShowingOutsider
+        ToShowingOutsider,
+        ShowingOutsider,
+        EndOverviewRestart
     }
 
     public enum GeneratorType
@@ -31,12 +38,26 @@ namespace Globals
 
         public static event Action NextStateEvent;
 
-        public static State currentState = State.Rules;
-        public static GeneratorType generatorType = GeneratorType.File;
-
+        private static State currentState = State.Rules;
+        private static GeneratorType generatorType = GeneratorType.File;
         private static List<GameObject> playerObjects;
         private static readonly System.Random getrandom = new System.Random();
         private static int currentIndex = -1;
+        private static WordSet wordSet;
+        private static string outsiderName;
+
+        internal static GeneratorType GetGeneratorType()
+        {
+            return generatorType;
+        }
+
+        public static WordSet GetWordSet() { 
+            return wordSet;
+        }
+        
+        public static void SetWordSet(WordSet value) {
+            wordSet = value; 
+        }
 
         public static void Initialize()
         {
@@ -48,8 +69,31 @@ namespace Globals
             return currentState;
         }
 
+        internal static void SetState(State state)
+        {
+            currentState = state;
+            currentIndex = -1; // restarting player index for next singleplayerloop
+            NextStateEvent?.Invoke();
+        }
+
+        internal static void NextState()
+        {
+            /* debugging skipping states
+            switch (currentState)
+            {
+                case State.ShowChosenWord:
+                    currentState += 10;
+                    break;
+            }
+            */
+            currentState++;
+            currentIndex = -1; // restarting player index for next singleplayerloop
+            NextStateEvent?.Invoke();
+        }
+
         public static void SetPlayers(List<GameObject> playerObjectsIn)
         {
+            Debug.Log("GameManager SetPlayers" + playerObjectsIn.Count);
             playerObjects = playerObjectsIn;
         }
 
@@ -58,33 +102,25 @@ namespace Globals
             return playerObjects;
         }
 
-        public static void Back()
+        internal static void SetBuzzWords(WordSet newWordset)
         {
+            wordSet = newWordset;
 
-        }
-
-        public static void Forward(string sceneName)
-        {
-
-        }
-
-        internal static void SetState(State state)
-        {
-            currentState = state;
-        }
-
-        internal static void SetBuzzWords(string insiderWord, string outsiderWord)
-        {
             int outsiderIndex = getrandom.Next(1,playerObjects.Count);
-            Debug.Log("Outsider: " + outsiderIndex);
             int i = 1;
             foreach (GameObject playerInfoObject in playerObjects)
             {
                 PlayerInfo playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
                 if (i == outsiderIndex)
-                    playerInfo.SetBuzzWord(outsiderWord);
+                {
+                    outsiderName = playerInfo.GetName();
+                    Debug.Log("Outsider: " + outsiderIndex + " " + outsiderName);
+                    playerInfo.SetBuzzWord(wordSet.OutsiderWord);
+                }
                 else
-                    playerInfo.SetBuzzWord(insiderWord);
+                {
+                    playerInfo.SetBuzzWord(wordSet.InsiderWord);
+                }
                 i++;
             }
         }
@@ -93,7 +129,6 @@ namespace Globals
         internal static GameObject GetNextPlayer()
         {
             currentIndex++;
-            Debug.Log("GettingPlayer " + currentIndex);
             if (currentIndex < playerObjects.Count)
             {
                 return playerObjects[currentIndex];
@@ -102,12 +137,9 @@ namespace Globals
             return null;
         }
 
-        internal static void NextState()
+        internal static string GetOutsiderName()
         {
-            currentState++;
-            currentIndex = -1; // restartin player index for next singleplayerloop
-            NextStateEvent?.Invoke();
-
+            return outsiderName;
         }
     }
 }

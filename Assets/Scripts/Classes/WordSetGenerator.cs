@@ -18,13 +18,14 @@ public class WordSetGenerator
 
     internal static void GenerateBuzWordsSync()
     {
-        GameManager.SetBuzzWords("Vakantie", "IJsje");
+        WordSet wordset = WordSets.GetRandomSet();
+        GameManager.SetBuzzWords(wordset);
         BuzzWordsGenerated?.Invoke();
     }
 
     public static IEnumerator GenerateBuzzWordsAsync()
     {
-        switch (GameManager.generatorType)
+        switch (GameManager.GetGeneratorType())
         {
             /*
              case GeneratorType.Claude:
