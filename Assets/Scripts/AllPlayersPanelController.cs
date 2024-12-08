@@ -13,11 +13,9 @@ public class AllPlayersPanelController : MonoBehaviour
     public GameObject errorMessage;
 
     private float contentPanelHeigth = 0f;
-    private float singleFieldHeigth = 100f;
     private float spacing = 15f;
     private List<GameObject> playerInfoObjects = new List<GameObject>();
     private int maxPlayers = 10;
-    List<string> playerNames = new List<string>();
 
     void Awake()
     {
@@ -34,72 +32,67 @@ public class AllPlayersPanelController : MonoBehaviour
         switch (GameManager.GetState())
         {
             case State.ShowingFirstWords:
-                AddShowingPlayers(2);
-                break;
             case State.ShowingSecondWords:
-                AddShowingPlayers(3);
-                break;
             case State.ShowingOutsider:
-                AddShowingPlayers(4);
+                AddShowingPlayers();
                 break;
         }
     }
 
-    private void AddShowingPlayers(int numFields)
+    private void AddShowingPlayers()
     {
-        contentPanelHeigth = 0;
+        contentPanelHeigth = 0f;
         foreach (GameObject playerInfoObject in playerInfoObjects)
         {
             PlayerInfo playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
-            PlayerInfoResizeAndSetParent(numFields, playerInfoObject, playerInfo);
+            PlayerInfoResizeAndSetParent(playerInfoObject, playerInfo);
             playerInfoObject.SetActive(true);
         }
     }
 
     public void SetEnteringPlayers()
     {
+        contentPanelHeigth = 0f;
         // when we are restarting destroy old playerObjects (easier than cleaning)
-        if (playerNames != null && playerNames.Count > 0)
+        if (GameManager.GetPlayerNames() != null && GameManager.GetPlayerNames().Count > 0)
         {
-            Debug.Log("playernames " + playerNames.Count + " " + playerNames[0]);
             foreach (GameObject playerInfoObject in playerInfoObjects)
             {
                 DestroyImmediate(playerInfoObject);
             }
             playerInfoObjects.Clear();
         }
-        Debug.Log("objects left " + playerInfoObjects.Count);
         // and create new ones with prefilled names if we have any
         for (int i = 1; i <= maxPlayers; i++)
         {
-            if (playerNames != null && playerNames.Count > 0 && i <= playerNames.Count)
+            if (GameManager.GetPlayerNames() != null && GameManager.GetPlayerNames().Count > 0 && i <= GameManager.GetPlayerNames().Count)
             {
-                AddEnteringPlayer(i, 1, playerNames[i - 1]);
+                AddEnteringPlayer(i, GameManager.GetPlayerNames()[i - 1]);
             }
             else
             {
-                AddEnteringPlayer(i, 1, "");
+                AddEnteringPlayer(i, "");
             }
         }
     }
 
-    private void AddEnteringPlayer(int index, int numFields, string playerName)
+    private void AddEnteringPlayer(int index, string playerName)
     {
         GameObject playerInfoObject = GameObject.Instantiate(playerInfoPrefab);
         playerInfoObjects.Add(playerInfoObject);
         PlayerInfo playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
         playerInfo.SetIndexAndNameLabel(index);
         playerInfo.SetName(playerName);
-        PlayerInfoResizeAndSetParent(numFields, playerInfoObject, playerInfo);
+        PlayerInfoResizeAndSetParent(playerInfoObject, playerInfo);
     }
 
-    private void PlayerInfoResizeAndSetParent(int numFields, GameObject playerInfoObject, PlayerInfo playerInfo)
+    private void PlayerInfoResizeAndSetParent(GameObject playerInfoObject, PlayerInfo playerInfo)
     {
         playerInfo.Resize();
         playerInfoObject.transform.SetParent(contentPanel.transform);
         playerInfoObject.transform.localScale = new Vector3(1f, 1f, 1f);
         RectTransform phRectTransform = contentPanel.GetComponent<RectTransform>();
-        contentPanelHeigth += singleFieldHeigth * numFields;
+        contentPanelHeigth += playerInfoObject.GetComponent<RectTransform>().rect.height;
         contentPanelHeigth += spacing;
         phRectTransform.sizeDelta = new Vector2(phRectTransform.sizeDelta.x, contentPanelHeigth);
         /* position is solved by a Vertical Layout Group */
@@ -108,7 +101,7 @@ public class AllPlayersPanelController : MonoBehaviour
     public bool ValidateInput()
     {
         int numberOfPlayers = 0;
-        playerNames.Clear();
+        GameManager.GetPlayerNames().Clear();
         List<string> nonUnique = new List<string>();
         foreach (GameObject playerInfoObject in playerInfoObjects)
         {
@@ -116,13 +109,13 @@ public class AllPlayersPanelController : MonoBehaviour
             if (playerInfo.HasName())
             {
                 numberOfPlayers++;
-                if (playerNames.Contains(playerInfo.GetName()))
+                if (GameManager.GetPlayerNames().Contains(playerInfo.GetName()))
                 {
                     nonUnique.Add(playerInfo.GetName());
                 }
                 else
                 {
-                    playerNames.Add(playerInfo.GetName());
+                    GameManager.GetPlayerNames().Add(playerInfo.GetName());
                 }
 
             }

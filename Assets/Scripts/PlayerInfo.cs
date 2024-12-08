@@ -13,6 +13,7 @@ public class PlayerInfo : MonoBehaviour
 
     public TextMeshProUGUI textNameLabel;
     public TMP_InputField nameInputField;
+    public GameObject buzzWordOrFirstPanel;
     public GameObject buzzWordPanel;
     public TMP_InputField buzzWordInputField;
     public GameObject firstWordPanel;
@@ -21,10 +22,13 @@ public class PlayerInfo : MonoBehaviour
     public TMP_InputField secondWordInputField;
     public GameObject outsiderPanel;
     public TMP_InputField outsiderInputField;
+    public GameObject bottomLinePanel;
+    public TMP_Dropdown outsiderDropdown;
 
     public int index;
 
-    private float singleFieldHeigth = 100f;
+    private float singleFieldHeight = 80f;
+    private float bottomLineHeight = 20f;
 
     public void Resize()
     {
@@ -50,9 +54,16 @@ public class PlayerInfo : MonoBehaviour
         }
 
         RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, singleFieldHeigth * numFields);
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, (singleFieldHeight * numFields) + bottomLineHeight);
 
         nameInputField.interactable = (GameManager.GetState() == State.EnteringPlayers);
+        buzzWordOrFirstPanel.SetActive(GameManager.GetState() == State.ShowChosenWord
+                                || GameManager.GetState() == State.EnteringFirstWord
+                                || GameManager.GetState() == State.ShowingFirstWords
+                                || GameManager.GetState() == State.EnteringSecondWord
+                                || GameManager.GetState() == State.ShowingSecondWords
+                                || GameManager.GetState() == State.EnteringOutsider
+                                || GameManager.GetState() == State.ShowingOutsider);
         buzzWordPanel.SetActive(GameManager.GetState() == State.ShowChosenWord);
         firstWordPanel.SetActive(GameManager.GetState() == State.EnteringFirstWord
                                 || GameManager.GetState() == State.ShowingFirstWords
@@ -68,8 +79,13 @@ public class PlayerInfo : MonoBehaviour
         secondWordInputField.interactable = (GameManager.GetState() == State.EnteringSecondWord);
         outsiderPanel.SetActive(GameManager.GetState() == State.EnteringOutsider
                                 || GameManager.GetState() == State.ShowingOutsider);
-        outsiderInputField.interactable = (GameManager.GetState() == State.EnteringOutsider);
+        outsiderDropdown.interactable = (GameManager.GetState() == State.EnteringOutsider);
 
+        if (GameManager.GetState() == State.EnteringOutsider)
+        {
+            outsiderDropdown.ClearOptions();
+            outsiderDropdown.AddOptions(GameManager.GetPlayerNames());
+        }
     }
 
     internal void SetIndexAndNameLabel(int i)
@@ -108,8 +124,11 @@ public class PlayerInfo : MonoBehaviour
 
     internal bool HasOutsider()
     {
+        return true;
+        /*
         outsiderInputField.text = outsiderInputField.text.Trim();
         return !string.IsNullOrWhiteSpace(outsiderInputField.text);
+        */
     }
 
     internal void SetBuzzWord(string buzzWord)

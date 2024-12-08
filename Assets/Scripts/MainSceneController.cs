@@ -21,6 +21,8 @@ public class MainSceneController : MonoBehaviour
     public GameObject panelToEnteringOutsider;
     public GameObject panelToShowingOutsider;
     public GameObject panelEndOverviewRestart;
+    public GameObject panelSettings;
+    public GameObject buttonSettings;
 
     private AllPlayersPanelController apc;
     private SinglePlayerPanelController spc;
@@ -31,7 +33,7 @@ public class MainSceneController : MonoBehaviour
         //team1Score = PlayerPrefs.GetInt("Team1Score");
         apc = panelAllPlayers.GetComponent<AllPlayersPanelController>();
         spc = panelSinglePlayer.GetComponent<SinglePlayerPanelController>();
-        GameManager.SetState(State.Rules);
+        GameManager.Initialize();
         ActivatePanels();
 
         if (Application.platform == RuntimePlatform.Android)
@@ -83,10 +85,18 @@ public class MainSceneController : MonoBehaviour
                 switch (GameManager.GetGeneratorType())
                 {
                     case GeneratorType.OpenAI:
-                        WordSetGenerator.GenerateBuzzWordsAsync();
+                        Debug.Log("calling openai async");
+                        StartCoroutine(WordSetGenerator.GenerateBuzzWordsAsync());
+                        Debug.Log("called openai async");
+                        break;
+                    case GeneratorType.Claude:
+                        Debug.Log("calling claude async");
+                        StartCoroutine(WordSetGenerator.GenerateBuzzWordsAsync());
+                        Debug.Log("called claude async");
                         break;
                     default:
-                        WordSetGenerator.GenerateBuzWordsSync();
+                        Debug.Log("hardcoded sync");
+                        WordSetGenerator.GenerateBuzWordsSync("Vaste lijst");
                         break;
                 }
             }
@@ -116,12 +126,19 @@ public class MainSceneController : MonoBehaviour
         panelToEnteringOutsider.SetActive(GameManager.GetState() == State.ToEnteringOutsider);
         panelToShowingOutsider.SetActive(GameManager.GetState() == State.ToShowingOutsider);
         panelEndOverviewRestart.SetActive(GameManager.GetState() == State.EndOverviewRestart);
+        buttonSettings.SetActive(GameManager.GetState() != State.Rules);
     }
 
     public void Again()
     {
         GameManager.SetState(State.EnteringPlayers);
         apc.SetEnteringPlayers();
+    }
+
+    public void OnSettings()
+    {
+        panelSettings.SetActive(true);
+        buttonSettings.SetActive(false);
     }
 
     public void OnLayout()

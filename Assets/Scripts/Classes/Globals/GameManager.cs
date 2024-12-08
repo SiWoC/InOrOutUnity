@@ -45,23 +45,36 @@ namespace Globals
         private static int currentIndex = -1;
         private static WordSet wordSet;
         private static string outsiderName;
+        private static string wordsOrigin;
+        public static List<string> playerNames = new List<string>();
+
+        public static List<string> GetPlayerNames() {
+            return playerNames;
+        }
 
         internal static GeneratorType GetGeneratorType()
         {
             return generatorType;
         }
 
+        internal static void SetGeneratorType(GeneratorType newGeneratorType)
+        {
+            generatorType = newGeneratorType;
+        }
+
         public static WordSet GetWordSet() { 
             return wordSet;
         }
         
-        public static void SetWordSet(WordSet value) {
-            wordSet = value; 
+        public static string GetWordsOrigin()
+        {
+            return wordsOrigin;
         }
 
         public static void Initialize()
         {
-            // TODO set generatorType from preferences/settings
+            generatorType = (GeneratorType)PlayerPrefs.GetInt("GeneratorType",0);
+            SetState(State.Rules);
         }
 
         public static State GetState()
@@ -72,13 +85,16 @@ namespace Globals
         internal static void SetState(State state)
         {
             currentState = state;
+            if (currentState == State.Rules && PlayerPrefs.GetInt("ShowRulesAtStartup", 1) == 0) {
+                NextState();
+            }
             currentIndex = -1; // restarting player index for next singleplayerloop
             NextStateEvent?.Invoke();
         }
 
         internal static void NextState()
         {
-            /* debugging skipping states
+            /* debugging skipping states 
             switch (currentState)
             {
                 case State.ShowChosenWord:
@@ -102,9 +118,10 @@ namespace Globals
             return playerObjects;
         }
 
-        internal static void SetBuzzWords(WordSet newWordset)
+        internal static void SetBuzzWords(WordSet newWordset, string origin)
         {
             wordSet = newWordset;
+            wordsOrigin = origin;
 
             int outsiderIndex = getrandom.Next(1,playerObjects.Count);
             int i = 1;
