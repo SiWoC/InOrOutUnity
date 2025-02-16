@@ -11,6 +11,7 @@ public class AllPlayersPanelController : MonoBehaviour
     public GameObject playerInfoPrefab;
     public GameObject readyButton;
     public GameObject errorMessage;
+    public GameObject errorMessagePanel;
 
     private float contentPanelHeigth = 0f;
     private float spacing = 15f;
@@ -136,9 +137,9 @@ public class AllPlayersPanelController : MonoBehaviour
     IEnumerator ShowErrorMessage(string message)
     {
         errorMessage.GetComponent<TMP_Text>().text = message;
-        errorMessage.SetActive(true);
+        errorMessagePanel.SetActive(true);
         yield return new WaitForSeconds(4);
-        errorMessage.SetActive(false);
+        errorMessagePanel.SetActive(false);
     }
 
     public List<GameObject> GetPlayers()

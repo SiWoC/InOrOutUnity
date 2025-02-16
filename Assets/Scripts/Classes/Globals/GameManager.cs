@@ -46,7 +46,7 @@ namespace Globals
         private static WordSet wordSet;
         private static string outsiderName;
         private static string wordsOrigin;
-        public static List<string> playerNames = new List<string>();
+        private static List<string> playerNames = new List<string>();
 
         public static List<string> GetPlayerNames() {
             return playerNames;
