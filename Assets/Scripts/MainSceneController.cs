@@ -10,19 +10,19 @@ using UnityEngine.UI;
 public class MainSceneController : MonoBehaviour
 {
 
-    public GameObject panelRules;
-    public GameObject panelAllPlayers;
-    public GameObject panelSinglePlayer;
-    public GameObject panelPauze;
-    public GameObject panelToEnteringFirstWord;
-    public GameObject panelToShowingFirstWords;
-    public GameObject panelToEnteringSecondWord;
-    public GameObject panelToShowingSecondWords;
-    public GameObject panelToEnteringOutsider;
-    public GameObject panelToShowingOutsider;
-    public GameObject panelEndOverviewRestart;
-    public GameObject panelSettings;
-    public GameObject buttonSettings;
+    public GameObject rulesPanel;
+    public GameObject allPlayersPanel;
+    public GameObject singlePlayerPanel;
+    public GameObject pauzePanel;
+    public GameObject toEnteringFirstWordPanel;
+    public GameObject toShowingFirstWordsPanel;
+    public GameObject toEnteringSecondWordPanel;
+    public GameObject toShowingSecondWordsPanel;
+    public GameObject toEnteringOutsiderPanel;
+    public GameObject toShowingOutsiderPanel;
+    public GameObject endOverviewRestartPanel;
+    public GameObject settingsPanel;
+    public GameObject settingsButton;
 
     private AllPlayersPanelController apc;
     private SinglePlayerPanelController spc;
@@ -31,8 +31,8 @@ public class MainSceneController : MonoBehaviour
     void Start()
     {
         //team1Score = PlayerPrefs.GetInt("Team1Score");
-        apc = panelAllPlayers.GetComponent<AllPlayersPanelController>();
-        spc = panelSinglePlayer.GetComponent<SinglePlayerPanelController>();
+        apc = allPlayersPanel.GetComponent<AllPlayersPanelController>();
+        spc = singlePlayerPanel.GetComponent<SinglePlayerPanelController>();
         GameManager.Initialize();
         ActivatePanels();
 
@@ -109,36 +109,30 @@ public class MainSceneController : MonoBehaviour
 
     private void ActivatePanels()
     {
-        panelRules.SetActive(GameManager.GetState() == State.Rules);
-        panelPauze.SetActive(GameManager.GetState() == State.GeneratingWords);
-        panelAllPlayers.SetActive(GameManager.GetState() == State.EnteringPlayers
+        rulesPanel.SetActive(GameManager.GetState() == State.Rules);
+        pauzePanel.SetActive(GameManager.GetState() == State.GeneratingWords);
+        allPlayersPanel.SetActive(GameManager.GetState() == State.EnteringPlayers
                                 || GameManager.GetState() == State.ShowingFirstWords
                                 || GameManager.GetState() == State.ShowingSecondWords
                                 || GameManager.GetState() == State.ShowingOutsider);
-        panelSinglePlayer.SetActive(GameManager.GetState() == State.ShowChosenWord
+        singlePlayerPanel.SetActive(GameManager.GetState() == State.ShowChosenWord
                                 || GameManager.GetState() == State.EnteringFirstWord
                                 || GameManager.GetState() == State.EnteringSecondWord
                                 || GameManager.GetState() == State.EnteringOutsider);
-        panelToEnteringFirstWord.SetActive(GameManager.GetState() == State.ToEnteringFirstWord);
-        panelToShowingFirstWords.SetActive(GameManager.GetState() == State.ToShowingFirstWords);
-        panelToEnteringSecondWord.SetActive(GameManager.GetState() == State.ToEnteringSecondWord);
-        panelToShowingSecondWords.SetActive(GameManager.GetState() == State.ToShowingSecondWords);
-        panelToEnteringOutsider.SetActive(GameManager.GetState() == State.ToEnteringOutsider);
-        panelToShowingOutsider.SetActive(GameManager.GetState() == State.ToShowingOutsider);
-        panelEndOverviewRestart.SetActive(GameManager.GetState() == State.EndOverviewRestart);
-        buttonSettings.SetActive(GameManager.GetState() != State.Rules);
-    }
-
-    public void Again()
-    {
-        GameManager.SetState(State.EnteringPlayers);
-        apc.SetEnteringPlayers();
+        toEnteringFirstWordPanel.SetActive(GameManager.GetState() == State.ToEnteringFirstWord);
+        toShowingFirstWordsPanel.SetActive(GameManager.GetState() == State.ToShowingFirstWords);
+        toEnteringSecondWordPanel.SetActive(GameManager.GetState() == State.ToEnteringSecondWord);
+        toShowingSecondWordsPanel.SetActive(GameManager.GetState() == State.ToShowingSecondWords);
+        toEnteringOutsiderPanel.SetActive(GameManager.GetState() == State.ToEnteringOutsider);
+        toShowingOutsiderPanel.SetActive(GameManager.GetState() == State.ToShowingOutsider);
+        endOverviewRestartPanel.SetActive(GameManager.GetState() == State.EndOverviewRestart);
+        settingsButton.SetActive(GameManager.GetState() != State.Rules);
     }
 
     public void OnSettings()
     {
-        panelSettings.SetActive(true);
-        buttonSettings.SetActive(false);
+        settingsPanel.SetActive(true);
+        settingsButton.SetActive(false);
     }
 
     public void OnLayout()

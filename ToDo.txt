@@ -1,11 +1,5 @@
-Outsider inputfield naar dropdown
 Extra paneel vóór EnteringPlayers met volgorde advies
 Punten
 empty enabled on Oops
 
-Een schoolplein met:
-- een groepje teenage leerlingen dat over iets aan het praten is
-- iemand die probeert mee te luisteren met het groepje
-- een leraar die bezig is met schrijven op een schrijfblok 
-- een leraar die bij de deur staat te wachten voor als de leerlingen naar binnen gaan
-- een eenling
+

@@ -18,4 +18,10 @@ public class EndOverviewRestartPanelController : MonoBehaviour
         wordsOriginText.text = "Woorden gegenereerd door: \n" + GameManager.GetWordsOrigin();
     }
 
+    public void OnAgain()
+    {
+        GameManager.SetState(State.EnteringPlayers);
+    }
+
+
 }

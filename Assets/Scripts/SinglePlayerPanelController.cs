@@ -10,6 +10,7 @@ public class SinglePlayerPanelController : MonoBehaviour
     public GameObject contentPanel;
     public GameObject nameButtonObject;
     public TextMeshProUGUI nameButtonText;
+    public TextMeshProUGUI nextOopsText;
     public GameObject oopsButtonObject;
     public GameObject readyButtonObject;
 
@@ -55,6 +56,7 @@ public class SinglePlayerPanelController : MonoBehaviour
             playerInfoObject.transform.SetParent(contentPanel.transform);
             playerInfoObject.transform.localScale = new Vector3(1f, 1f, 1f);
 
+            nextOopsText.text = "Ben je dit niet,\r\ngeef dan door.";
             nameButtonText.text = "Ik ben\n" + playerInfo.GetName();
             nameButtonObject.SetActive(true);
             oopsButtonObject.SetActive(false);
@@ -70,6 +72,7 @@ public class SinglePlayerPanelController : MonoBehaviour
     {
         playerInfoObject.SetActive(true);
         nameButtonObject.SetActive(false);
+        nextOopsText.text = "Per ongeluk geklikt,\r\nkies dan Oeps.";
         oopsButtonObject.SetActive(true);
         readyButtonObject.SetActive(true);
     }
@@ -77,6 +80,7 @@ public class SinglePlayerPanelController : MonoBehaviour
     public void OnOops()
     {
         playerInfoObject.SetActive(false);
+        nextOopsText.text = "Ben je dit niet,\r\ngeef dan door.";
         nameButtonObject.SetActive(true);
         oopsButtonObject.SetActive(false);
         readyButtonObject.SetActive(false);

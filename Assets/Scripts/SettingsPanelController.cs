@@ -12,6 +12,7 @@ public class SettingsPanelController : MonoBehaviour
     public Toggle openAIToggle;
     public Toggle claudeToggle;
     public GameObject settingsButton;
+    public GameObject restartConfirmationPanel;
 
     void Start()
     {
@@ -88,5 +89,22 @@ public class SettingsPanelController : MonoBehaviour
         PlayerPrefs.Save();
         settingsPanel.SetActive(false);
         settingsButton.SetActive(true);
+    }
+
+    public void OnRestart()
+    {
+        restartConfirmationPanel.SetActive(true);
+    }
+
+    public void OnCancelRestart()
+    {
+        restartConfirmationPanel.SetActive(false);
+    }
+
+    public void OnReallyRestart()
+    {
+        restartConfirmationPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        GameManager.SetState(State.EnteringPlayers);
     }
 }

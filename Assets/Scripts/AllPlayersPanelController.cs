@@ -25,13 +25,16 @@ public class AllPlayersPanelController : MonoBehaviour
 
     void Start()
     {
-        SetEnteringPlayers();
+        //SetEnteringPlayers();
     }
 
     private void GameManager_NextStateEvent()
     {
         switch (GameManager.GetState())
         {
+            case State.EnteringPlayers:
+                SetEnteringPlayers();
+                break;
             case State.ShowingFirstWords:
             case State.ShowingSecondWords:
             case State.ShowingOutsider:
