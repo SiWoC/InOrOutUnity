@@ -86,7 +86,7 @@ namespace Globals
         {
             currentState = state;
             if (currentState == State.Rules && PlayerPrefs.GetInt("ShowRulesAtStartup", 1) == 0) {
-                NextState();
+                currentState++;
             }
             currentIndex = -1; // restarting player index for next singleplayerloop
             NextStateEvent?.Invoke();
