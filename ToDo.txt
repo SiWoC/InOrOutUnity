@@ -1,6 +1,3 @@
-empty enabled on Oops
-SinglePlayer: <Button> opruimen
-
 Extra paneel vóór EnteringPlayers met volgorde advies
 Punten
 

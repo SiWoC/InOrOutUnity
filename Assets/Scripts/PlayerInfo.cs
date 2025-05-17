@@ -159,4 +159,17 @@ public class PlayerInfo : MonoBehaviour
     {
         SetNameLabelText();
     }
+
+    public void ClearEnabledWord()
+    {
+        if (firstWordInputField.interactable)
+        {
+            firstWordInputField.text = string.Empty;
+        }
+        if (secondWordInputField.interactable)
+        {
+            secondWordInputField.text = string.Empty;
+        }
+
+    }
 }

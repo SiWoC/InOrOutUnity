@@ -17,9 +17,6 @@ public class SinglePlayerPanelController : MonoBehaviour
     public GameObject oopsButtonObject;
     public GameObject readyButtonObject;
 
-    private Button nameButton;
-    private Button oopsButton;
-    private Button readyButton;
     private GameObject playerInfoObject;
     private PlayerInfo playerInfo;
     private string currentPlayerName;
@@ -34,9 +31,6 @@ public class SinglePlayerPanelController : MonoBehaviour
 
     void Start()
     {
-        nameButton = nameButtonObject.GetComponent<Button>();
-        oopsButton = oopsButtonObject.GetComponent<Button>();
-        readyButton = readyButtonObject.GetComponent<Button>();
     }
 
     void OnEnable()
@@ -97,6 +91,7 @@ public class SinglePlayerPanelController : MonoBehaviour
 
     public void OnOops()
     {
+        playerInfo.ClearEnabledWord();
         playerInfoObject.SetActive(false);
         SetNextOopsText(true);
         nameButtonObject.SetActive(true);
