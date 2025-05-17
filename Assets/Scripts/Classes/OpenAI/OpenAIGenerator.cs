@@ -58,7 +58,7 @@ namespace Assets.Scripts.Classes.OpenAI
                 request.downloadHandler = new DownloadHandlerBuffer();
 
                 request.SetRequestHeader("Content-Type", "application/json");
-                request.SetRequestHeader("Authorization", "Bearer " + PlayerPrefs.GetString("OpenAIApiKey"));
+                request.SetRequestHeader("Authorization", "Bearer " + SettingsPanelController.GetOpenAIApiKey());
                 //Debug.Log("apikey: " + PlayerPrefs.GetString("OpenAIApiKey"));
 
                 yield return request.SendWebRequest();
@@ -78,13 +78,13 @@ namespace Assets.Scripts.Classes.OpenAI
                     }
                     else
                     {
-                        WordSetGenerator.GenerateBuzWordsSync("Vaste lijst, OpenAI invalid response");
+                        WordSetGenerator.GenerateBuzWordsSync(WordSetGenerator.GetOriginStaticListText() + ", OpenAI invalid response");
                     }
                 }
                 else
                 {
                     Debug.LogError("Request failed: " + request.error);
-                    WordSetGenerator.GenerateBuzWordsSync("Vaste lijst, OpenAI error");
+                    WordSetGenerator.GenerateBuzWordsSync(WordSetGenerator.GetOriginStaticListText() + ", OpenAI error");
                 }
             }
         }

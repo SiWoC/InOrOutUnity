@@ -1,10 +1,16 @@
 using Globals;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsPanelController : MonoBehaviour
 {
+    private const string PREF_OPENAIAPIKEY = "OpenAIApiKey";
+    private const string PREF_CLAUDEAPIKEY = "ClaudeApiKey";
+    private const string PREF_GENERATORTYPE = "GeneratorType";
+    private const string PREF_SHOWRULESATSTARTUP = "ShowRulesAtStartup";
+
     public GameObject settingsPanel;
     public TMP_InputField openAIApiKeyInputField;
     public TMP_InputField claudeApiKeyInputField;
@@ -31,8 +37,8 @@ public class SettingsPanelController : MonoBehaviour
                 break;
         }
 
-        openAIApiKeyInputField.text = PlayerPrefs.GetString("OpenAIApiKey", string.Empty);
-        claudeApiKeyInputField.text = PlayerPrefs.GetString("ClaudeApiKey", string.Empty);
+        openAIApiKeyInputField.text = PlayerPrefs.GetString(PREF_OPENAIAPIKEY, string.Empty);
+        claudeApiKeyInputField.text = PlayerPrefs.GetString(PREF_CLAUDEAPIKEY, string.Empty);
     }
 
     // Update is called once per frame
@@ -70,8 +76,8 @@ public class SettingsPanelController : MonoBehaviour
     public void OnReady()
     {
         GeneratorType newGeneratorType;
-        PlayerPrefs.SetString("OpenAIApiKey", openAIApiKeyInputField.text);
-        PlayerPrefs.SetString("ClaudeApiKey", claudeApiKeyInputField.text);
+        PlayerPrefs.SetString(PREF_OPENAIAPIKEY, openAIApiKeyInputField.text);
+        PlayerPrefs.SetString(PREF_CLAUDEAPIKEY, claudeApiKeyInputField.text);
         if (openAIToggle.isOn && !openAIApiKeyInputField.text.Equals(string.Empty))
         {
             newGeneratorType = GeneratorType.OpenAI;
@@ -85,7 +91,7 @@ public class SettingsPanelController : MonoBehaviour
             newGeneratorType = GeneratorType.File;
         }
         GameManager.SetGeneratorType(newGeneratorType);
-        PlayerPrefs.SetInt("GeneratorType", (int)newGeneratorType);
+        PlayerPrefs.SetInt(PREF_GENERATORTYPE, (int)newGeneratorType);
         PlayerPrefs.Save();
         settingsPanel.SetActive(false);
         settingsButton.SetActive(true);
@@ -106,5 +112,38 @@ public class SettingsPanelController : MonoBehaviour
         restartConfirmationPanel.SetActive(false);
         settingsPanel.SetActive(false);
         GameManager.SetState(State.EnteringPlayers);
+    }
+
+    public static bool GetShowRulesAtStartup()
+    {
+        return (PlayerPrefs.GetInt(PREF_SHOWRULESATSTARTUP, 1) == 1);
+    }
+
+    public static void SetShowRulesAtStartup(bool showRulesAtStartup)
+    {
+        if (showRulesAtStartup)
+        {
+            PlayerPrefs.SetInt(PREF_SHOWRULESATSTARTUP, 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(PREF_SHOWRULESATSTARTUP, 0);
+        }
+        PlayerPrefs.Save();
+    }
+
+    public static GeneratorType GetGeneratorType()
+    {
+        return (GeneratorType)PlayerPrefs.GetInt(PREF_GENERATORTYPE, 0);
+    }
+
+    internal static string GetOpenAIApiKey()
+    {
+        return PlayerPrefs.GetString(PREF_OPENAIAPIKEY);
+    }
+
+    internal static string GetClaudeApiKey()
+    {
+        return PlayerPrefs.GetString(PREF_CLAUDEAPIKEY);
     }
 }

@@ -1,5 +1,18 @@
+empty enabled on Oops
+SinglePlayer: <Button> opruimen
+
 Extra paneel vóór EnteringPlayers met volgorde advies
 Punten
-empty enabled on Oops
 
+
+
+Playstore tekst nl and/or readme
+Waar praten ze over?
+Wat zei ze daar nou?
+Waar slaat dat nou weer op?
+
+Ben je een insider of een outsider?
+Laten ze je alleen maar denken dat ze het over hetzelfde als jij hebben?
+Of is hij de outsider en lijkt het alleen maar alsof jullie over hetzelfde praten?
+Of ben jij de outsider?
 

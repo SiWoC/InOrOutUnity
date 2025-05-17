@@ -37,6 +37,7 @@ namespace Globals
     {
 
         public static event Action NextStateEvent;
+        public static string LOCALIZATION_TABLE_NAME = "LocalizedStrings";
 
         private static State currentState = State.Rules;
         private static GeneratorType generatorType = GeneratorType.File;
@@ -73,7 +74,7 @@ namespace Globals
 
         public static void Initialize()
         {
-            generatorType = (GeneratorType)PlayerPrefs.GetInt("GeneratorType",0);
+            generatorType = SettingsPanelController.GetGeneratorType();
             SetState(State.Rules);
         }
 
@@ -85,7 +86,9 @@ namespace Globals
         internal static void SetState(State state)
         {
             currentState = state;
-            if (currentState == State.Rules && PlayerPrefs.GetInt("ShowRulesAtStartup", 1) == 0) {
+            // skip rules?
+            if (currentState == State.Rules && !SettingsPanelController.GetShowRulesAtStartup()) {
+                // don't use NextState() it will result in invoking the NextStatEvent twice
                 currentState++;
             }
             currentIndex = -1; // restarting player index for next singleplayerloop
@@ -109,7 +112,7 @@ namespace Globals
 
         public static void SetPlayers(List<GameObject> playerObjectsIn)
         {
-            Debug.Log("GameManager SetPlayers" + playerObjectsIn.Count);
+            //Debug.Log("GameManager SetPlayers" + playerObjectsIn.Count);
             playerObjects = playerObjectsIn;
         }
 
@@ -131,7 +134,7 @@ namespace Globals
                 if (i == outsiderIndex)
                 {
                     outsiderName = playerInfo.GetName();
-                    Debug.Log("Outsider: " + outsiderIndex + " " + outsiderName);
+                    //Debug.Log("Outsider: " + outsiderIndex + " " + outsiderName);
                     playerInfo.SetBuzzWord(wordSet.OutsiderWord);
                 }
                 else

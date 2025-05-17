@@ -96,7 +96,7 @@ public class MainSceneController : MonoBehaviour
                         break;
                     default:
                         Debug.Log("hardcoded sync");
-                        WordSetGenerator.GenerateBuzWordsSync("Vaste lijst");
+                        WordSetGenerator.GenerateBuzWordsSync(WordSetGenerator.GetOriginStaticListText());
                         break;
                 }
             }
@@ -133,18 +133,6 @@ public class MainSceneController : MonoBehaviour
     {
         settingsPanel.SetActive(true);
         settingsButton.SetActive(false);
-    }
-
-    public void OnLayout()
-    {
-        PlayerPrefs.SetString("Layout", "something");
-        PlayerPrefs.Save();
-    }
-
-    private void SaveScores() { 
-        PlayerPrefs.SetInt("Team1Score", 1);
-        PlayerPrefs.SetInt("Team2Score", 2);
-        PlayerPrefs.Save();
     }
 
     public void OnExit()

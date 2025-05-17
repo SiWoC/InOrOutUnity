@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LocalizedStrings_nl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: nl
+  m_SharedData: {fileID: 11400000, guid: 5352d4ecce61a5d4ca5ee33575212ea5, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 7836489127929053652
+  m_TableData:
+  - m_Id: 1720648695808
+    m_Localized: "Het spel:\nEr is \xE9\xE9n outsider, de rest zijn insiders.\nDe
+      outsider wil graag meepraten, maar de insiders willen niet dat de outsider
+      weet waar het over gaat.\nDe insiders moeten te weten komen wie de outsider
+      is.\nDe outsider wil te weten komen waar de insiders het over hebben.\n\nHet
+      spel kiest een set van twee woorden, deze gaan een beetje over hetzelfde onderwerp.\nHet
+      spel kiest een outsider.\nGeef de app door aan wie het spel aangeeft en bekijk
+      jouw woord zonder dat de andere spelers het zien.\n\nGeef de app door aan wie
+      het spel aangeeft en vul een eerste woord in dat je associ\xEBert met het woord
+      dat je gezien hebt. Wel of niet specifiek, welke informatie geef je daarmee
+      aan de outsider? Of ben je misschien zelf de outsider?\n\nHet spel laat alle
+      eerste woorden zien en de spelers kijken of ze daar iets uit kunnen bepalen.
+      Waarom heb je dat ingevuld? Waar slaat dat nu weer op?\n\nNa een tijdje denken
+      de spelers genoeg te weten en begint een tweede ronde, iedereen vult een tweede
+      woord in.\nEr volgt een tweede discussieronde.\n\nDan vult iedereen in wie
+      hij denkt dat de outsider is.\nEr volgt een laatste discussieronde.\nEr wordt
+      gekeken of de spelers het eens kunnen worden wie de outsider is en de outsider
+      probeert te raden waar de insiders het over hadden.\n\nEn?\nHad je het goed?
+      \nOf was jij misschien wel de outsider zonder dat je het wist.\n\nScores bijhouden?
+      \nAch, is dat nou belangrijk? Je weet toch wel dat jij de beste bent!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3234817605632
+    m_Localized: Klaar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4212182712320
+    m_Localized: 'De spelernamen
+
+      moeten uniek zijn
+
+      {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5208057282560
+    m_Localized: "Dit is jouw spelerscherm.\nHierboven zie je jouw buzzwoord, \nvul
+      je jouw woorden in\nen wie je denkt dat de outsider is.\n\nGenoeg gezien of
+      getypt,\nkies dan Klaar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5383697956864
+    m_Localized: Klaar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326226797887488
+    m_Localized: 'Per ongeluk geklikt,
+
+      kies dan Oeps.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6025795567616
+    m_Localized: 'Ben je dit niet,
+
+      geef dan door.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7271260585984
+    m_Localized: Oeps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18618597736448
+    m_Localized: "Een momentje \ngeduld aub..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18940539928576
+    m_Localized: 'We starten met de eerste ronde waarin je een eerste woord opgeeft
+      dat iets te maken heeft met het woord dat je net gezien hebt.
+
+
+      Wel of
+      niet specifiek,
+
+      welke informatie geef je daarmee aan de outsider?
+
+      Of
+      ben je zelf misschien de outsider?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19134744592384
+    m_Localized: Eens kijken wat iedereen als eerste woord heeft ingevuld.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19391159173120
+    m_Localized: "We starten met de tweede ronde waarin je een tweede woord opgeeft
+      dat iets te maken heeft met het woord dat je als eerste gezien hebt.\n\nDenk
+      je al te weten \nwie de outsider is? \n\nLok je hem uit de tent \nof \nhoud
+      je je gedeisd?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19511351148544
+    m_Localized: Eens kijken wat iedereen als tweede woord heeft ingevuld.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19674555711488
+    m_Localized: "Nu weet je toch wel \nwie de outsider is? \n\nZeker wel\nof...\nin
+      ieder geval bijna zeker."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19845037391872
+    m_Localized: 'Eens kijken wie iedereen denkt
+
+      dat de outsider is.
+
+
+      Zijn
+      jullie het met elkaar eens?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19985152311296
+    m_Localized: De Outsider was
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20080933437440
+    m_Localized: Het Insider woord was
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20144837853184
+    m_Localized: Het Outsider woord was
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20205491683328
+    m_Localized: 'En?
+
+      Geraden?
+
+      Verbaasd?
+
+      Verrast?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20449734393856
+    m_Localized: Nog een keer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20597050933248
+    m_Localized: Woordgenerator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20714420142080
+    m_Localized: Vaste Lijst
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20817671323648
+    m_Localized: Toon regels bij opstarten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20943592718336
+    m_Localized: 'Privacy policy:
+
+      Deze app verzamelt, bewaart of verzendt
+      geen persoonlijke gegevens.
+
+
+      Met dank aan: Tim Toolman''s AI
+
+      Icon
+      door <a href="https://www.vectorstock.com/royalty-free-vectors/vectors-by_jemastock">jemastock</a>
+
+      Background
+      images <a href="https://www.vecteezy.com/free-photos/night-club-party">Night
+      Club by Vecteezy</a>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21000882716672
+    m_Localized: Herstart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21031194951680
+    m_Localized: Klaar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21123855515648
+    m_Localized: Annuleer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21154264219648
+    m_Localized: Herstart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21204243546112
+    m_Localized: 'Dit brengt je terug naar het speler invoerscherm
+
+      en kiest
+      nieuwe woorden,
+
+      alle invoer behalve de namen zal gewist worden.
+
+
+      Wil
+      je echt herstarten?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32276912504832
+    m_Localized: Speler {0}
+    m_Metadata:
+      m_Items:
+      - rid: 7836489127929053652
+  - m_Id: 23958231941120
+    m_Localized: Jouw woord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24313049088000
+    m_Localized: Eerste woord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25091415441408
+    m_Localized: Tweede woord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40414445273088
+    m_Localized: 'Ik ben
+
+      {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 7836489127929053652
+  - m_Id: 331947916623872
+    m_Localized: 'Er moeten minstens
+
+      3 spelers zijn.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 384099687038976
+    m_Localized: 'Woorden gegenereerd door:
+
+      {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 387771590475776
+    m_Localized: Vaste lijst
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 7836489127929053652
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 32276912504832
+        - id: 40414445273088

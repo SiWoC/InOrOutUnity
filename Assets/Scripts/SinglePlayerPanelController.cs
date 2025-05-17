@@ -1,7 +1,10 @@
 using Globals;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SinglePlayerPanelController : MonoBehaviour
@@ -19,6 +22,10 @@ public class SinglePlayerPanelController : MonoBehaviour
     private Button readyButton;
     private GameObject playerInfoObject;
     private PlayerInfo playerInfo;
+    private string currentPlayerName;
+    private LocalizedString locNameButtonText = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "SinglePlayerPanel-NameButtonText");
+    private LocalizedString locTextNextOopsNext = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "SinglePlayerPanel-TextNextOopsNext");
+    private LocalizedString locTextNextOopsOops = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "SinglePlayerPanel-TextNextOopsOops");
 
     void Awake()
     {
@@ -30,6 +37,16 @@ public class SinglePlayerPanelController : MonoBehaviour
         nameButton = nameButtonObject.GetComponent<Button>();
         oopsButton = oopsButtonObject.GetComponent<Button>();
         readyButton = readyButtonObject.GetComponent<Button>();
+    }
+
+    void OnEnable()
+    {
+        LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
+    }
+
+    void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
     }
 
     private void GameManager_NextStateEvent()
@@ -56,8 +73,9 @@ public class SinglePlayerPanelController : MonoBehaviour
             playerInfoObject.transform.SetParent(contentPanel.transform);
             playerInfoObject.transform.localScale = new Vector3(1f, 1f, 1f);
 
-            nextOopsText.text = "Ben je dit niet,\r\ngeef dan door.";
-            nameButtonText.text = "Ik ben\n" + playerInfo.GetName();
+            SetNextOopsText(true);
+            currentPlayerName = playerInfo.GetName();
+            SetNameButtonText();
             nameButtonObject.SetActive(true);
             oopsButtonObject.SetActive(false);
             readyButtonObject.SetActive(false);
@@ -72,7 +90,7 @@ public class SinglePlayerPanelController : MonoBehaviour
     {
         playerInfoObject.SetActive(true);
         nameButtonObject.SetActive(false);
-        nextOopsText.text = "Per ongeluk geklikt,\r\nkies dan Oeps.";
+        SetNextOopsText(false);
         oopsButtonObject.SetActive(true);
         readyButtonObject.SetActive(true);
     }
@@ -80,10 +98,27 @@ public class SinglePlayerPanelController : MonoBehaviour
     public void OnOops()
     {
         playerInfoObject.SetActive(false);
-        nextOopsText.text = "Ben je dit niet,\r\ngeef dan door.";
+        SetNextOopsText(true);
         nameButtonObject.SetActive(true);
         oopsButtonObject.SetActive(false);
         readyButtonObject.SetActive(false);
+    }
+
+    private void SetNameButtonText()
+    {
+        nameButtonText.text = locNameButtonText.GetLocalizedString(currentPlayerName);
+    }
+
+    private void SetNextOopsText(bool useNextText)
+    {
+        if (useNextText)
+        {
+            nextOopsText.text = locTextNextOopsNext.GetLocalizedString();
+        }
+        else
+        {
+            nextOopsText.text = locTextNextOopsOops.GetLocalizedString();
+        }
     }
 
     public void OnPlayerReady()
@@ -107,4 +142,11 @@ public class SinglePlayerPanelController : MonoBehaviour
             NextPlayer();
         }
     }
+
+    private void OnSelectedLocaleChanged(Locale locale)
+    {
+        SetNameButtonText();
+        SetNextOopsText(nameButtonObject.activeSelf);
+    }
+
 }

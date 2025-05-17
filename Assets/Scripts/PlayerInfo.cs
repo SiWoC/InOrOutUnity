@@ -2,6 +2,8 @@ using Globals;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -29,6 +31,18 @@ public class PlayerInfo : MonoBehaviour
 
     private float singleFieldHeight = 80f;
     private float bottomLineHeight = 20f;
+
+    private LocalizedString locPlayerWithIndex = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "PlayerPanel-PlayerWithIndex");
+
+    void OnEnable()
+    {
+        LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
+    }
+
+    void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
+    }
 
     public void Resize()
     {
@@ -91,7 +105,12 @@ public class PlayerInfo : MonoBehaviour
     internal void SetIndexAndNameLabel(int i)
     {
         index = i;
-        textNameLabel.text = "Speler " + i;
+        SetNameLabelText();
+    }
+
+    private void SetNameLabelText()
+    {
+        textNameLabel.text = locPlayerWithIndex.GetLocalizedString(index);
     }
 
     public string GetName()
@@ -134,5 +153,10 @@ public class PlayerInfo : MonoBehaviour
     internal void SetBuzzWord(string buzzWord)
     {
         buzzWordInputField.text = buzzWord;
+    }
+
+    private void OnSelectedLocaleChanged(Locale locale)
+    {
+        SetNameLabelText();
     }
 }

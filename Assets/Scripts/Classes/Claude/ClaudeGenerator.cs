@@ -44,7 +44,7 @@ namespace Assets.Scripts.Classes.Claude
             {
                 // Set request headers
                 request.SetRequestHeader("Content-Type", "application/json");
-                request.SetRequestHeader("x-api-key", PlayerPrefs.GetString("ClaudeApiKey"));
+                request.SetRequestHeader("x-api-key", SettingsPanelController.GetClaudeApiKey());
                 request.SetRequestHeader("Anthropic-Version", "2023-06-01");
 
                 // Convert payload to byte array
@@ -61,7 +61,7 @@ namespace Assets.Scripts.Classes.Claude
                 {
                     Debug.LogError($"Claude API Error: {request.error}");
                     Debug.LogError($"Claude API Error: {request.result}");
-                    WordSetGenerator.GenerateBuzWordsSync("Vaste lijst, Claude API error");
+                    WordSetGenerator.GenerateBuzWordsSync(WordSetGenerator.GetOriginStaticListText() + ", Claude API error");
                 }
                 else
                 {
@@ -83,13 +83,13 @@ namespace Assets.Scripts.Classes.Claude
                         }
                         else
                         {
-                            WordSetGenerator.GenerateBuzWordsSync("Vaste lijst, Claude invalid response");
+                            WordSetGenerator.GenerateBuzWordsSync(WordSetGenerator.GetOriginStaticListText() + ", Claude invalid response");
                         }
                     }
                     catch (Exception ex)
                     {
                         Debug.LogError($"Claude API Parse Error: {ex.Message}");
-                        WordSetGenerator.GenerateBuzWordsSync("Vaste lijst, Claude Parse error");
+                        WordSetGenerator.GenerateBuzWordsSync(WordSetGenerator.GetOriginStaticListText() + ", Claude Parse error");
                     }
                 }
             }

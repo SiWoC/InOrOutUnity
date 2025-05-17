@@ -3,10 +3,12 @@ using System;
 using Globals;
 using Assets.Scripts.Classes.OpenAI;
 using Assets.Scripts.Classes.Claude;
+using UnityEngine.Localization;
 
 public class WordSetGenerator
 {
     public static event Action BuzzWordsGenerated;
+    private static LocalizedString locOriginStaticList = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "WordSetGenerator-OriginStaticList");
 
     internal static void GenerateBuzWordsSync(string origin)
     {
@@ -29,6 +31,11 @@ public class WordSetGenerator
     public static void GeneratorReady()
     {
         BuzzWordsGenerated?.Invoke();
+    }
+
+    public static string GetOriginStaticListText()
+    {
+        return locOriginStaticList.GetLocalizedString();
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class AllPlayersPanelController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class AllPlayersPanelController : MonoBehaviour
     private float spacing = 15f;
     private List<GameObject> playerInfoObjects = new List<GameObject>();
     private int maxPlayers = 10;
+
+    private LocalizedString locErrorMessageUnique = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "AllPlayersPanel-ErrorMessageUnique");
+    private LocalizedString locErrorMessageMinimum = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "AllPlayersPanel-ErrorMessageMinimum");
 
     void Awake()
     {
@@ -126,12 +130,12 @@ public class AllPlayersPanelController : MonoBehaviour
         }
         if (nonUnique.Count > 0)
         {
-            StartCoroutine(ShowErrorMessage("De spelernamen moeten\n uniek zijn.\n" + nonUnique[0]));
+            StartCoroutine(ShowErrorMessage(locErrorMessageUnique.GetLocalizedString(nonUnique[0])));
             return false;
         }
         if (numberOfPlayers < 3)
         {
-            StartCoroutine(ShowErrorMessage("Er moeten minstens\n3 spelers zijn"));
+            StartCoroutine(ShowErrorMessage(locErrorMessageMinimum.GetLocalizedString()));
             return false;
         }
         return true;
