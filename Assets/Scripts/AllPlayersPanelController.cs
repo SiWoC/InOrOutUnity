@@ -19,6 +19,7 @@ public class AllPlayersPanelController : MonoBehaviour
     private List<GameObject> playerInfoObjects = new List<GameObject>();
     private int maxPlayers = 10;
 
+    private LocalizedString locErrorMessageOrder = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "AllPlayersPanel-ErrorMessageOrder");
     private LocalizedString locErrorMessageUnique = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "AllPlayersPanel-ErrorMessageUnique");
     private LocalizedString locErrorMessageMinimum = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "AllPlayersPanel-ErrorMessageMinimum");
 
@@ -82,6 +83,7 @@ public class AllPlayersPanelController : MonoBehaviour
                 AddEnteringPlayer(i, "");
             }
         }
+        StartCoroutine(ShowErrorMessage(locErrorMessageOrder.GetLocalizedString(), 10));
     }
 
     private void AddEnteringPlayer(int index, string playerName)
@@ -130,22 +132,22 @@ public class AllPlayersPanelController : MonoBehaviour
         }
         if (nonUnique.Count > 0)
         {
-            StartCoroutine(ShowErrorMessage(locErrorMessageUnique.GetLocalizedString(nonUnique[0])));
+            StartCoroutine(ShowErrorMessage(locErrorMessageUnique.GetLocalizedString(nonUnique[0]), 4));
             return false;
         }
         if (numberOfPlayers < 3)
         {
-            StartCoroutine(ShowErrorMessage(locErrorMessageMinimum.GetLocalizedString()));
+            StartCoroutine(ShowErrorMessage(locErrorMessageMinimum.GetLocalizedString(), 4));
             return false;
         }
         return true;
     }
 
-    IEnumerator ShowErrorMessage(string message)
+    IEnumerator ShowErrorMessage(string message, int seconds)
     {
         errorMessage.GetComponent<TMP_Text>().text = message;
         errorMessagePanel.SetActive(true);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(seconds);
         errorMessagePanel.SetActive(false);
     }
 

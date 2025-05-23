@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 //using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class MainSceneController : MonoBehaviour
@@ -42,11 +43,14 @@ public class MainSceneController : MonoBehaviour
                 .GetStatic<AndroidJavaObject>("currentActivity"); // Get the Current Activity from the Unity Player.
             act.Call("setShowWhenLocked", true);
         }
-
     }
 
     void Awake()
     {
+        // Initialize localization first
+        LocalizationSettings.InitializationOperation.WaitForCompletion();
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(SettingsPanelController.GetLocale());
+
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         WordSetGenerator.BuzzWordsGenerated += OnBuzzWordsGenerated;
         GameManager.NextStateEvent += GameManager_NextStateEvent;

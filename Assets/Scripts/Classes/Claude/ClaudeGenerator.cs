@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using UnityEngine.Networking;
 using UnityEngine;
 using Globals;
+using Unity.VisualScripting;
+using UnityEngine.Localization.Settings;
 
 namespace Assets.Scripts.Classes.Claude
 {
@@ -14,14 +16,21 @@ namespace Assets.Scripts.Classes.Claude
     {
         // API Configuration
         private const string API_ENDPOINT = "https://api.anthropic.com/v1/messages";
+        private static System.Random rnd = new System.Random();
 
         public static IEnumerator CallClaudeApi()
         {
-            string promptText = "Generate 500 sets of two loosely connected words suitable for a 14-year-old." +
+            string randomDate = DateTime.Now.AddDays(rnd.Next(-200, 0)).ToString();
+            string language = LocalizationSettings.SelectedLocale.LocaleName;
+            string promptText = String.Format("Assume today is {0}.\n" +
+                "Generate 500 sets of two loosely connected words suitable for a 14-year-old.\n" +
                 "- The first word should be one that a group of people (insiders) might be discussing in everyday life, not too focused on school subjects.\n" +
                 "- The second word is what someone listening nearby (an outsider) might catch. It should be related to the first word but not the main topic.\n\n" +
                 "Make sure the words in the response have the same casing, starting with a Capital.\n" +
-                "Respond in Dutch by picking 1 set at random in the following format:\n[first word],[second word]";
+                "Respond in {1} by picking 1 set at random in the following format:\n" +
+                "[first word],[second word]", randomDate, language);
+
+            Debug.Log(promptText);
 
             // Construct the request payload
             string jsonPayload = JsonUtility.ToJson(new ClaudeRequestBody

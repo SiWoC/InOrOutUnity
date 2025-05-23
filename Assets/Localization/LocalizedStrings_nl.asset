@@ -251,6 +251,12 @@ MonoBehaviour:
     m_Localized: Vaste lijst
     m_Metadata:
       m_Items: []
+  - m_Id: 590666764091392
+    m_Localized: 'Voer de spelers in,
+
+      in volgorde van doorgeven.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

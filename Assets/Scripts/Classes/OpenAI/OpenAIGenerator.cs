@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Globals;
+using System;
+using UnityEngine.Localization.Settings;
 
 namespace Assets.Scripts.Classes.OpenAI
 {
@@ -12,6 +14,7 @@ namespace Assets.Scripts.Classes.OpenAI
     {
 
         private static string OPENAI_URL = "https://api.openai.com/v1/chat/completions";
+        private static System.Random rnd = new System.Random();
 
         public static IEnumerator CallOpenAI()
         {
@@ -21,11 +24,17 @@ namespace Assets.Scripts.Classes.OpenAI
                             "- The second word is what someone listening nearby (an outsider) might catch. It should be related to the first word but not the main topic.\n\n" +
                             "Provide the response as:\nInsider word: [first word]\nOutsider word: [second word]";
             */
-            string promptText = "Generate 500 sets of two loosely connected words suitable for a 14-year-old." +
+            string randomDate = DateTime.Now.AddDays(rnd.Next(-200, 0)).ToString();
+            string language = LocalizationSettings.SelectedLocale.LocaleName;
+            string promptText =String.Format("Assume today is {0}.\n" +
+                "Generate 500 sets of two loosely connected words suitable for a 14-year-old.\n" +
                 "- The first word should be one that a group of people (insiders) might be discussing in everyday life, not too focused on school subjects.\n" +
                 "- The second word is what someone listening nearby (an outsider) might catch. It should be related to the first word but not the main topic.\n\n" +
                 "Make sure the words in the response have the same casing, starting with a Capital.\n" +
-                "Respond in Dutch by picking 1 set at random in the following format:\n[first word],[second word]";
+                "Respond in {1} by picking 1 set at random in the following format:\n" +
+                "[first word],[second word]", randomDate, language);
+
+            Debug.Log(promptText);
 
             var jsonBody = new
 

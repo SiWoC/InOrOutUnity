@@ -1,8 +1,8 @@
 using Globals;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
 
 public class SettingsPanelController : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class SettingsPanelController : MonoBehaviour
     private const string PREF_CLAUDEAPIKEY = "ClaudeApiKey";
     private const string PREF_GENERATORTYPE = "GeneratorType";
     private const string PREF_SHOWRULESATSTARTUP = "ShowRulesAtStartup";
+    private const string PREF_LOCALE = "Locale";
 
     public GameObject settingsPanel;
     public TMP_InputField openAIApiKeyInputField;
@@ -110,8 +111,18 @@ public class SettingsPanelController : MonoBehaviour
     public void OnReallyRestart()
     {
         restartConfirmationPanel.SetActive(false);
-        settingsPanel.SetActive(false);
+        OnReady();
         GameManager.SetState(State.EnteringPlayers);
+    }
+
+    public void OnDutch()
+    {
+        SetLocale("nl");
+    }
+
+    public void OnEnglish()
+    {
+        SetLocale("en");
     }
 
     public static bool GetShowRulesAtStartup()
@@ -145,5 +156,28 @@ public class SettingsPanelController : MonoBehaviour
     internal static string GetClaudeApiKey()
     {
         return PlayerPrefs.GetString(PREF_CLAUDEAPIKEY);
+    }
+
+    public static string GetLocale()
+    {
+        string storedLocale = PlayerPrefs.GetString(PREF_LOCALE, null);
+        if (storedLocale != null)
+        {
+            return storedLocale;
+        }
+        
+        // Check system locale
+        if (Application.systemLanguage == SystemLanguage.Dutch)
+        {
+            return "nl";
+        }
+        return "en";
+    }
+
+    public static void SetLocale(string locale)
+    {
+        PlayerPrefs.SetString(PREF_LOCALE, locale);
+        PlayerPrefs.Save();
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(locale);
     }
 }
