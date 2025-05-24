@@ -2,6 +2,7 @@ using Globals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class EndOverviewRestartPanelController : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class EndOverviewRestartPanelController : MonoBehaviour
         insiderWordInputField.text = GameManager.GetWordSet().InsiderWord;
         outsiderWordInputField.text = GameManager.GetWordSet().OutsiderWord;
         wordsOriginText.text = locWordsOriginText.GetLocalizedString(GameManager.GetWordsOrigin());
+        LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
+    }
+
+    void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
     }
 
     public void OnAgain()
@@ -26,5 +33,9 @@ public class EndOverviewRestartPanelController : MonoBehaviour
         GameManager.SetState(State.EnteringPlayers);
     }
 
+    private void OnSelectedLocaleChanged(Locale locale)
+    {
+        wordsOriginText.text = locWordsOriginText.GetLocalizedString(GameManager.GetWordsOrigin());
+    }
 
 }
