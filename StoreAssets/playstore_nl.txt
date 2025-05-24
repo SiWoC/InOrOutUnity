@@ -1,0 +1,34 @@
+# Play Store Content (Nederlands)
+
+## App Naam
+In or Out
+
+## Korte Beschrijving (80 tekens)
+Een sociaal spel waar een outsider probeert mee te praten met de insiders.
+
+## Volledige Beschrijving (4000 tekens)
+Waar praten ze over?
+Wat zei ze daar nou?
+Waar slaat dat nou weer op?
+
+Ben je een insider of een outsider?
+Laten ze je alleen maar denken dat ze het over hetzelfde als jij hebben?
+Of is hij de outsider en lijkt het alleen maar alsof jullie over hetzelfde praten?
+Of ben jij de outsider?
+
+Spelconcept:
+- Één speler is de outsider, de rest zijn insiders
+- De outsider wil meepraten, maar de insiders willen niet dat ze weten waar het over gaat
+- De insiders moeten uitzoeken wie de outsider is
+- De outsider wil uitzoeken waar de insiders het over hebben
+
+Hoe te spelen:
+Volg de teksten en knoppen.
+Of lees de regels in the game
+of hieronder:
+1. Het spel kiest een set van twee gerelateerde woorden en kiest een outsider
+2. Spelers geven om beurten woorden in die verband houden met wat ze zien
+3. Twee rondes van woordinvoer en discussie
+4. Spelers proberen de outsider te identificeren terwijl de outsider het onderwerp probeert te raden
+5. Het spel eindigt met een laatste discussie en onthulling
+

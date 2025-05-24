@@ -1,0 +1,34 @@
+# Play Store Content (English)
+
+## App Name
+In or Out
+
+## Short Description (80 characters)
+A social game where one outsider tries to join the conversation of the insiders.
+
+## Full Description (4000 tekens)
+What are they talking about?
+What did she just say?
+What does that even mean?
+
+Are you an insider or an outsider?
+Are they just making you think you're talking about the same thing?
+Or is he the outsider and it only seems like you're talking about the same thing?
+Or are you the outsider?
+
+Game Concept:
+- One player is the outsider, while the rest are insiders
+- The outsider wants to join the conversation, but the insiders don't want them to know what they're talking about
+- The insiders need to figure out who the outsider is
+- The outsider wants to figure out what the insiders are talking about
+
+How to Play:
+Just follow the texts and buttons.
+Or read the rules in game
+or below:
+1. The game selects a set of two related words and chooses an outsider
+2. Players take turns entering words that relate to what they see
+3. Two rounds of word entry and discussion
+4. Players try to identify the outsider while the outsider tries to guess the topic
+5. The game ends with a final discussion and reveal
+
