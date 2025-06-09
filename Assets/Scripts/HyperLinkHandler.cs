@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class CreditsLinkHandler : MonoBehaviour, IPointerClickHandler
+public class HyperLinkHandler : MonoBehaviour, IPointerClickHandler
 {
     private TMP_Text text;
 
