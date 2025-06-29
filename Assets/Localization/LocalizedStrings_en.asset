@@ -20,71 +20,28 @@ MonoBehaviour:
     - rid: 7836489127929053653
   m_TableData:
   - m_Id: 1720648695808
-    m_Localized: 'The game:
-
-      There is one outsider, the rest are insiders.
-
-      The
-      outsider wants to join the conversation, but the insiders don''t want the outsider
-      to know what they''re talking about.
-
-      The insiders need to figure out
-      who the outsider is.
-
-      The outsider wants to figure out what the insiders
-      are talking about.
-
-
-      The game selects a set of two words that are somewhat
-      related to the same topic.
-
-      The game chooses an outsider.
-
-      Pass
-      the app to the player indicated by the game and look at your word without other
-      players seeing it.
-
-
-      Pass the app to the player indicated by the game
-      and enter a first word that you associate with the word you''ve seen. Whether
-      specific or not, what information are you giving to the outsider? Or are you
-      perhaps the outsider yourself?
-
-
-      The game shows all first words and players
-      look if they can determine anything from them. Why did you enter that? What
-      does that mean?
-
-
-      After a while, players think they know enough and a
-      second round begins, everyone enters a second word.
-
-      A second discussion
-      round follows.
-
-
-      Then everyone enters who they think the outsider is.
-
-      A
-      final discussion round follows.
-
-      The players try to agree on who the
-      outsider is and the outsider tries to guess what the insiders were talking
-      about.
-
-
-      And?
-
-      Were you right?
-
-      Or were you perhaps the outsider
-      without knowing it.
-
-
-      Keep score?
-
-      Ah, is that really important?
-      You know you''re the best anyway!'
+    m_Localized: "The game:\nThere is one outsider; the rest are insiders.\nThe outsider
+      wants to join the conversation, but the insiders don\u2019t want the outsider
+      to know what they\u2019re talking about.\nThe insiders need to figure out who
+      the outsider is.\nThe outsider wants to figure out what the insiders are talking
+      about.\n\nThe game is played on a single device that is passed to the next
+      player each time.\nAt the start, the game selects a set of two words that are
+      somewhat related to the same topic.\nThe game chooses an outsider.\n\nThe setup
+      round begins.\nPass the device to the player indicated by the game, and that
+      player looks at their word without the other players seeing it.\n\nThe first
+      round begins.\nPass the device again to the player indicated by the game, and
+      that player enters a first word that they associate with the word they saw.
+      Whether specific or not, what information are they giving to the outsider?
+      Or are they perhaps the outsider themself?\n\nA first discussion round follows.\nThe
+      game shows all the first words, and the players see if they can figure anything
+      out. Why did you enter that? What does that mean?\n\nAfter a while, the players
+      think they know enough and a second round begins: everyone enters a second
+      word.\nA second discussion round follows.\n\nThen everyone enters who they
+      think the outsider is.\nA final discussion round follows.\nThe players see
+      if they can agree on who the outsider is, and the outsider tries to guess what
+      the insiders were talking about.\n\nAnd?\nWere you right?\nOr were you perhaps
+      the outsider without knowing it?\n\nKeep score?\nAh, is that really important?
+      You know you\u2019re the best anyway!"
     m_Metadata:
       m_Items: []
   - m_Id: 3234817605632
@@ -100,36 +57,21 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5208057282560
-    m_Localized: 'This is your player screen.
+    m_Localized: 'When you push the button,
 
-      Above you see your buzzword,
+      you will see your buzzword.
 
-      enter
-      your words
-
-      and who you think the outsider is.
+      Remember
+      it well!
 
 
-      Seen or typed
-      enough.
+      Seen enough,
 
-      Choose Done'
+      choose Done'
     m_Metadata:
       m_Items: []
   - m_Id: 5383697956864
     m_Localized: Done
-    m_Metadata:
-      m_Items: []
-  - m_Id: 326226797887488
-    m_Localized: 'Clicked by accident,
-
-      choose Oops.'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6025795567616
-    m_Localized: 'Not you?
-
-      Pass along.'
     m_Metadata:
       m_Items: []
   - m_Id: 7271260585984
@@ -312,6 +254,56 @@ MonoBehaviour:
     m_Localized: 'Enter players
 
       in order of passing.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15590375110967296
+    m_Localized: 'Not you?
+
+      Pass along.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15590687032967168
+    m_Localized: 'Clicked by accident,
+
+      choose Oops'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15595062891610112
+    m_Localized: 'Now it is time to
+
+      enter your first word.
+
+
+      Done typing,
+
+      choose
+      Done'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15596209115201536
+    m_Localized: 'Now it is time to
+
+      enter your second word.
+
+
+      Done typing,
+
+      choose
+      Done'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15597034646503424
+    m_Localized: 'Now it is time to enter
+
+      who you think
+
+      is the outsider.
+
+
+      Picked
+      one,
+
+      choose Done'
     m_Metadata:
       m_Items: []
   references:

@@ -19,14 +19,6 @@ MonoBehaviour:
     m_Key: WordSetGenerator-OriginStaticList
     m_Metadata:
       m_Items: []
-  - m_Id: 326226797887488
-    m_Key: SinglePlayerPanel-TextNextOopsOops
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6025795567616
-    m_Key: SinglePlayerPanel-TextNextOopsNext
-    m_Metadata:
-      m_Items: []
   - m_Id: 40414445273088
     m_Key: SinglePlayerPanel-NameButtonText
     m_Metadata:
@@ -72,7 +64,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5208057282560
-    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/TextTop
+    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/ShowBuzzwordExplanationText
     m_Metadata:
       m_Items: []
   - m_Id: 5383697956864
@@ -168,6 +160,26 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 590666764091392
     m_Key: AllPlayersPanel-ErrorMessageOrder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15590375110967296
+    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/PassOnText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15590687032967168
+    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/OopsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15595062891610112
+    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/FirstWordExplanationText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15596209115201536
+    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/SecondWordExplanationText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15597034646503424
+    m_Key: MainScene/UICanvas/SinglePlayerPanel/Panel/OutsiderExplanationText
     m_Metadata:
       m_Items: []
   m_Metadata:

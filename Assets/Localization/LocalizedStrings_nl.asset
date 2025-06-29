@@ -24,21 +24,25 @@ MonoBehaviour:
       outsider wil graag meepraten, maar de insiders willen niet dat de outsider
       weet waar het over gaat.\nDe insiders moeten te weten komen wie de outsider
       is.\nDe outsider wil te weten komen waar de insiders het over hebben.\n\nHet
-      spel kiest een set van twee woorden, deze gaan een beetje over hetzelfde onderwerp.\nHet
-      spel kiest een outsider.\nGeef de app door aan wie het spel aangeeft en bekijk
-      jouw woord zonder dat de andere spelers het zien.\n\nGeef de app door aan wie
-      het spel aangeeft en vul een eerste woord in dat je associ\xEBert met het woord
-      dat je gezien hebt. Wel of niet specifiek, welke informatie geef je daarmee
-      aan de outsider? Of ben je misschien zelf de outsider?\n\nHet spel laat alle
-      eerste woorden zien en de spelers kijken of ze daar iets uit kunnen bepalen.
-      Waarom heb je dat ingevuld? Waar slaat dat nu weer op?\n\nNa een tijdje denken
-      de spelers genoeg te weten en begint een tweede ronde, iedereen vult een tweede
-      woord in.\nEr volgt een tweede discussieronde.\n\nDan vult iedereen in wie
-      hij denkt dat de outsider is.\nEr volgt een laatste discussieronde.\nEr wordt
-      gekeken of de spelers het eens kunnen worden wie de outsider is en de outsider
-      probeert te raden waar de insiders het over hadden.\n\nEn?\nHad je het goed?
-      \nOf was jij misschien wel de outsider zonder dat je het wist.\n\nScores bijhouden?
-      \nAch, is dat nou belangrijk? Je weet toch wel dat jij de beste bent!"
+      spel wordt gespeeld op \xE9\xE9n apparaat dat steeds doorgegeven wordt aan
+      de volgende speler.\nIn het begin kiest het spel een set van twee woorden,
+      deze gaan een beetje over hetzelfde onderwerp.\nHet spel kiest een outsider.\n\nDe
+      opstartronde begint.\nGeef het apparaat door aan wie het spel aangeeft en diegene
+      bekijkt diens woord zonder dat de andere spelers het zien.\n\nDe eerste ronde
+      begint.\nGeef he apparaat weer door aan wie het spel aangeeft en diegene vult
+      een eerste woord in dat die associ\xEBert met het woord dat die gezien heeft.
+      Wel of niet specifiek, welke informatie geeft die daarmee aan de outsider?
+      Of is die misschien zelf de outsider?\n\nEen eerste discussieronde volgt.\nHet
+      spel laat alle eerste woorden zien en de spelers kijken of ze daar iets uit
+      kunnen bepalen. Waarom heb je dat ingevuld? Waar slaat dat nu weer op?\n\nNa
+      een tijdje denken de spelers genoeg te weten en begint een tweede ronde, iedereen
+      vult een tweede woord in.\nEr volgt een tweede discussieronde.\n\nDan vult
+      iedereen in wie die denkt dat de outsider is.\nEr volgt een laatste discussieronde.\nEr
+      wordt gekeken of de spelers het eens kunnen worden wie de outsider is en de
+      outsider probeert te raden waar de insiders het over hadden.\n\nEn?\nHad je
+      het goed? \nOf was jij misschien wel de outsider zonder dat je het wist.\n\nScores
+      bijhouden? \nAch, is dat nou belangrijk? Je weet toch wel dat jij de beste
+      bent!"
     m_Metadata:
       m_Items: []
   - m_Id: 3234817605632
@@ -54,25 +58,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5208057282560
-    m_Localized: "Dit is jouw spelerscherm.\nHierboven zie je jouw buzzwoord, \nvul
-      je jouw woorden in\nen wie je denkt dat de outsider is.\n\nGenoeg gezien of
-      getypt,\nkies dan Klaar"
+    m_Localized: 'Als je op de knop klikt,
+
+      zie je hierboven
+
+      jouw buzzwoord.
+
+      Onthoud
+      het goed!
+
+
+      Genoeg gezien,
+
+      kies dan Klaar'
     m_Metadata:
       m_Items: []
   - m_Id: 5383697956864
     m_Localized: Klaar
-    m_Metadata:
-      m_Items: []
-  - m_Id: 326226797887488
-    m_Localized: 'Per ongeluk geklikt,
-
-      kies dan Oeps.'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6025795567616
-    m_Localized: 'Ben je dit niet,
-
-      geef dan door.'
     m_Metadata:
       m_Items: []
   - m_Id: 7271260585984
@@ -255,6 +257,62 @@ MonoBehaviour:
     m_Localized: 'Voer de spelers in,
 
       in volgorde van doorgeven.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15590375110967296
+    m_Localized: 'Ben je dit niet,
+
+      geef dan door.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15590687032967168
+    m_Localized: 'Per ongeluk geklikt,
+
+      kies dan Oeps'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15595062891610112
+    m_Localized: 'Nu is het tijd om
+
+      je eerste woord
+
+      in te voeren.
+
+
+      Klaar
+      met typen,
+
+      kies dan Klaar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15596209115201536
+    m_Localized: 'Nu is het tijd om
+
+      je tweede woord
+
+      in te voeren.
+
+
+      Klaar
+      met typen,
+
+      kies dan Klaar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15597034646503424
+    m_Localized: 'Nu is het tijd
+
+      om in te voeren
+
+      wie je denkt
+
+      dat
+      de outsider is.
+
+
+      Iemand gekozen,
+
+      kies dan Klaar'
     m_Metadata:
       m_Items: []
   references:

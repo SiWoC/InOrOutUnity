@@ -12,3 +12,45 @@ Laten ze je alleen maar denken dat ze het over hetzelfde als jij hebben?
 Of is hij de outsider en lijkt het alleen maar alsof jullie over hetzelfde praten?
 Of ben jij de outsider?
 
+---------
+
+Assume today is 2025-05-01 and use a salt of [837462time19].
+Generate 500 sets of two loosely connected words suitable for a 14-year-old.
+- The first word should be a random, everyday topic, object, trend, hobby, mood, or popular term that teens might discuss (avoid schoolwork or overly serious subjects).
+- The second word should be unexpectedly but plausibly connected to the first (by sound, mood, context, usage, feeling, etc.), but should not be a direct synonym.
+- Use different types of words (nouns, verbs, adjectives, etc.) and vary the categories.
+- Avoid obvious or always recurring combinations.
+- Both words should start with a capital letter and have the same casing.
+Respond in Dutch by picking 1 set at random in the following format:
+[first word],[second word]
+
+---------
+
+Assume today is 2025-05-01 and use a salt of [837462time19].
+Generate 500 sets of two loosely connected words suitable for a 14-year-old.
+- The first word should be one that a group of people (insiders) might be discussing in everyday life, not too focused on school subjects.
+- The second word is what someone listening nearby (an outsider) might catch. It should be related to the first word but not the main topic.
+
+Make sure the words in the response have the same casing, starting with a Capital.
+Respond in Dutch by picking 1 set at random in the following format:
+[first word],[second word]
+
+------------
+
+Generate 500 sets of two loosely connected words suitable for a 14-year-old.
+- The first word should be one that a group of people (insiders) might be discussing in everyday life, not too focused on school subjects.
+- The second word is what someone listening nearby (an outsider) might catch. It should be related to the first word but not the main topic.
+
+Make sure the words in the response have the same casing, starting with a Capital.
+Respond in Dutch by picking 1 set at random in the following format:
+[first word],[second word]
+
+-------------
+
+Generate a set of two loosely connected words suitable for a 14-year-old.
+- The first word should be one that a group of people (insiders) might be discussing in everyday life, not too focused on school subjects.
+- The second word is what someone listening nearby (an outsider) might catch. It should be related to the first word but not the main topic.
+
+Make sure the words in the response have the same casing, starting with a Capital.
+Respond in local nl in the following format:
+[first word],[second word]

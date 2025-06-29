@@ -11,18 +11,21 @@ public class SinglePlayerPanelController : MonoBehaviour
 {
 
     public GameObject contentPanel;
+    public GameObject showBuzzWordExplanationObject;
+    public GameObject firstWordExplanationObject;
+    public GameObject secondWordExplanationObject;
+    public GameObject outsiderExplanationObject;
+    public GameObject readyButtonObject;
+    public GameObject passOnText;
+    public GameObject oopsText;
     public GameObject nameButtonObject;
     public TextMeshProUGUI nameButtonText;
-    public TextMeshProUGUI nextOopsText;
     public GameObject oopsButtonObject;
-    public GameObject readyButtonObject;
 
     private GameObject playerInfoObject;
     private PlayerInfo playerInfo;
     private string currentPlayerName;
     private LocalizedString locNameButtonText = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "SinglePlayerPanel-NameButtonText");
-    private LocalizedString locTextNextOopsNext = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "SinglePlayerPanel-TextNextOopsNext");
-    private LocalizedString locTextNextOopsOops = new LocalizedString(GameManager.LOCALIZATION_TABLE_NAME, "SinglePlayerPanel-TextNextOopsOops");
 
     void Awake()
     {
@@ -61,13 +64,15 @@ public class SinglePlayerPanelController : MonoBehaviour
         playerInfoObject = GameManager.GetNextPlayer();
         if (playerInfoObject != null) // is there a next player or are we going to the next state
         {
+            ActivatePanels();
             playerInfoObject.SetActive(false);
             playerInfo = playerInfoObject.GetComponent<PlayerInfo>();
             playerInfo.Resize();
             playerInfoObject.transform.SetParent(contentPanel.transform);
             playerInfoObject.transform.localScale = new Vector3(1f, 1f, 1f);
 
-            SetNextOopsText(true);
+            passOnText.SetActive(true);
+            oopsText.SetActive(false);
             currentPlayerName = playerInfo.GetName();
             SetNameButtonText();
             nameButtonObject.SetActive(true);
@@ -80,11 +85,21 @@ public class SinglePlayerPanelController : MonoBehaviour
         }
     }
 
+    private void ActivatePanels()
+    {
+        showBuzzWordExplanationObject.SetActive(GameManager.GetState() == State.ShowChosenWord);
+        firstWordExplanationObject.SetActive(GameManager.GetState() == State.EnteringFirstWord);
+        secondWordExplanationObject.SetActive(GameManager.GetState() == State.EnteringSecondWord);
+        outsiderExplanationObject.SetActive(GameManager.GetState() == State.EnteringOutsider);
+    }
+
+
     public void OnImPlayerX()
     {
         playerInfoObject.SetActive(true);
         nameButtonObject.SetActive(false);
-        SetNextOopsText(false);
+        passOnText.SetActive(false);
+        oopsText.SetActive(true);
         oopsButtonObject.SetActive(true);
         readyButtonObject.SetActive(true);
     }
@@ -93,7 +108,8 @@ public class SinglePlayerPanelController : MonoBehaviour
     {
         playerInfo.ClearEnabledWord();
         playerInfoObject.SetActive(false);
-        SetNextOopsText(true);
+        passOnText.SetActive(true);
+        oopsText.SetActive(false);
         nameButtonObject.SetActive(true);
         oopsButtonObject.SetActive(false);
         readyButtonObject.SetActive(false);
@@ -102,18 +118,6 @@ public class SinglePlayerPanelController : MonoBehaviour
     private void SetNameButtonText()
     {
         nameButtonText.text = locNameButtonText.GetLocalizedString(currentPlayerName);
-    }
-
-    private void SetNextOopsText(bool useNextText)
-    {
-        if (useNextText)
-        {
-            nextOopsText.text = locTextNextOopsNext.GetLocalizedString();
-        }
-        else
-        {
-            nextOopsText.text = locTextNextOopsOops.GetLocalizedString();
-        }
     }
 
     public void OnPlayerReady()
@@ -141,7 +145,6 @@ public class SinglePlayerPanelController : MonoBehaviour
     private void OnSelectedLocaleChanged(Locale locale)
     {
         SetNameButtonText();
-        SetNextOopsText(nameButtonObject.activeSelf);
     }
 
 }
